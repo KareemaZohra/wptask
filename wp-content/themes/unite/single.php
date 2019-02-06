@@ -12,7 +12,10 @@ get_header(); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php get_template_part( 'content', 'single' ); ?>
+			<?
+            php get_template_part( 'content', 'single' ); ?>
+			<? the_archive_description( '<div class="taxonomy-description">', '</div>' );
+             ?>
 
 			<?php unite_post_nav(); ?>
 

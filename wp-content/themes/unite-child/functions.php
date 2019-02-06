@@ -18,7 +18,7 @@ function wporg_custom_post_type()
     register_post_type('wporg_film',
                        array(
                            'labels'      => array(
-                               'name'          => __('films'),
+                               'name'          => __('All films'),
                                'singular_name' => __('film'),
                            ),
                            'public'      => true,
