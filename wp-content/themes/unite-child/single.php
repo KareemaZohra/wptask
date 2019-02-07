@@ -20,8 +20,8 @@ get_header(); ?>
             get_template_part( 'content', get_post_format() );
             
             ?>
-            <h3 style="padding: 5%; padding-top:0; color : #54397E">
-                More :
+            <h4 style="padding: 5%; padding-top:0; color : #54397E">
+                About -
                  <?php
                 $topic = get_the_terms(get_the_ID(), 'Country');
                     foreach($topic as $topics){
@@ -40,7 +40,7 @@ get_header(); ?>
                         echo "Release Date : ".$topics->name.", ";
                     }
                 ?>
-            </h3>
+            </h4>
             <?php
  
             // Previous/next post navigation.

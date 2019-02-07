@@ -13,34 +13,38 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area col-sm-12 col-md-8">
-		<main id="main" class="site-main" role="main">
+	<?php
+        $args = array( 'post_type' => 'wporg_film', 'posts_per_page' => 10 );
+        $loop = new WP_Query( $args );
+        while ( $loop->have_posts() ) : $loop->the_post();
+          the_title();
+          echo '<div class="entry-content">';
+          the_content();
+          echo '</div>';
+        ?>
+        <h6 style="padding: 1%; padding-top:0; color : #54397E">
+                About -
+                 <?php
+                $topic = get_the_terms(get_the_ID(), 'Country');
+                    foreach($topic as $topics){
+                        echo "Country : ".$topics->name.", " ;
+                    }
+                $topic = get_the_terms(get_the_ID(), 'Genere');
+                    foreach($topic as $topics){
+                        echo "Genere : ".$topics->name.", "; 
+                    }
+                $topic = get_the_terms(get_the_ID(), 'price');
+                    foreach($topic as $topics){
+                        echo "Ticket Price : ".$topics->name.", ";
+                    }
+                $topic = get_the_terms(get_the_ID(), 'date');
+                    foreach($topic as $topics){
+                        echo "Release Date : ".$topics->name.", ";
+                    }
+                ?>
+            </h5>
+        <?php
+        endwhile;
+    ?>
 
-		<?php if ( have_posts() ) : ?>
-
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
-				?>
-
-			<?php endwhile; ?>
-
-			<?php unite_paging_nav(); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'content', 'none' ); ?>
-
-		<?php endif; ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
