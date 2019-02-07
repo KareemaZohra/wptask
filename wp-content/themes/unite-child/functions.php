@@ -18,7 +18,7 @@ function wporg_custom_post_type()
     register_post_type('wporg_film',
                        array(
                            'labels'      => array(
-                               'name'          => __('All films'),
+                               'name'          => __('films'),
                                'singular_name' => __('film'),
                            ),
                            'public'      => true,
@@ -155,6 +155,26 @@ register_taxonomy('date','wporg_film', array(
     ),
     'public' => true
 ));
+
+
+//shortcode for 5 films
+function five_film( $atts ) {
+   
+        $args = array( 'post_type' => 'wporg_film', 'posts_per_page' => 5 );
+        $loop = new WP_Query( $args );
+        $counter = 0;
+        $max = 5;
+        while ( $loop->have_posts() and $counter<$max ) : $loop->the_post(); ?>
+          <h4><?php the_title(); ?></h4>
+          <?php
+          echo '<div class="entry-content">';
+        $readmore = '<br><a href="'.get_permalink().'">Read More ...</a>';
+          echo wp_trim_words(get_the_content(),5,$readmore);
+        
+        endwhile;
+    
+}
+add_shortcode( 'film5', 'five_film' );
 
 ?>
 

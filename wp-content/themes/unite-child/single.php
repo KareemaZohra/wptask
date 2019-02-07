@@ -37,7 +37,7 @@ get_header(); ?>
                     }
                 $topic = get_the_terms(get_the_ID(), 'date');
                     foreach($topic as $topics){
-                        echo "Release Date : ".$topics->name.", ";
+                        echo "Release Date : ".$topics->name;
                     }
                 ?>
             </h4>
