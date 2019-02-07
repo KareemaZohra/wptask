@@ -30,8 +30,12 @@ get_header(); ?>
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
 					get_template_part( 'content', get_post_format() );
+            
 				?>
-
+<!--
+                    <?php get_the_term_list( $id, $taxonomy, $before, $sep, $after ) ?> 
+                     <ul><?php echo get_the_term_list( $wporg_film->ID, 'wporg_film', '<li class="jobs_item">', ', ', '</li>' ) ?></ul>
+-->
 			<?php endwhile; ?>
 
 			<?php unite_paging_nav(); ?>

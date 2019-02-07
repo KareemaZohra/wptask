@@ -142,50 +142,19 @@ function wporg_register_taxonomy_actors()
 }
 add_action('init', 'wporg_register_taxonomy_actors');
 
-//input box for ticket price & release date
-function wporg_add_custom_box()
-{
-    $screens = ['wporg_film', 'wporg_cpt'];
-    foreach ($screens as $screen) {
-        add_meta_box(
-            'wporg_box_id',           // Unique ID
-            'Price and Release Date',  // Box title
-            'wporg_custom_box_html',  // Content callback, must be of type callable
-            $screen                   // Post type
-        );
-    }
-}
-add_action('add_meta_boxes', 'wporg_add_custom_box');
-
-function wporg_custom_box_html($wporg_film)
-{
-    $value = get_post_meta($wporg_film->ID, '_wporg_meta_key', true);
-    ?>
-    <label for="wporg_field">Ticket Price</label>
-    <input type="text" name="wporg_field" id="wporg_field" class="postbox" <?php selected($value, 'something'); ?>>
-    <label for="wporg_field2">Release Date</label>
-    <input type="text" name="wporg_field" id="wporg_field2" class="postbox" <?php selected($value, 'something'); ?>>
-    <?php
-}
-
-function wporg_save_postdata($post_id)
-{
-    if (array_key_exists('wporg_field', $_POST)) {
-        update_post_meta(
-            $post_id,
-            '_wporg_meta_key',
-            $_POST['wporg_field']
-        );
-    }
-    if (array_key_exists('wporg_field2', $_POST)) {
-        update_post_meta(
-            $post_id,
-            '_wporg_meta_key',
-            $_POST['wporg_field2']
-        );
-    }
-}
-add_action('save_post', 'wporg_save_postdata');
+//new code for price and date
+register_taxonomy('price','wporg_film', array(
+    'labels' => array(
+        'name'=>'Ticket Price'
+    ),
+    'public' => true
+));
+register_taxonomy('date','wporg_film', array(
+    'labels' => array(
+        'name'=>'Release Date'
+    ),
+    'public' => true
+));
 
 ?>
 

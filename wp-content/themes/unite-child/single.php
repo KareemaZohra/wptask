@@ -1,10 +1,6 @@
 <?php
 /**
  * The template for displaying all single posts and attachments
- *
- * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
  */
  
 get_header(); ?>
@@ -22,11 +18,30 @@ get_header(); ?>
              * (where ___ is the post format) and that will be used instead.
              */
             get_template_part( 'content', get_post_format() );
- 
-            // If comments are open or we have at least one comment, load up the comment template.
-            if ( comments_open() || get_comments_number() ) :
-                comments_template();
-            endif;
+            
+            ?>
+            <h3 style="padding: 5%; padding-top:0; color : #54397E">
+                More :
+                 <?php
+                $topic = get_the_terms(get_the_ID(), 'Country');
+                    foreach($topic as $topics){
+                        echo "Country : ".$topics->name.", " ;
+                    }
+                $topic = get_the_terms(get_the_ID(), 'Genere');
+                    foreach($topic as $topics){
+                        echo "Genere : ".$topics->name.", "; 
+                    }
+                $topic = get_the_terms(get_the_ID(), 'price');
+                    foreach($topic as $topics){
+                        echo "Ticket Price : ".$topics->name.", ";
+                    }
+                $topic = get_the_terms(get_the_ID(), 'date');
+                    foreach($topic as $topics){
+                        echo "Release Date : ".$topics->name.", ";
+                    }
+                ?>
+            </h3>
+            <?php
  
             // Previous/next post navigation.
             the_post_navigation( array(
@@ -37,7 +52,6 @@ get_header(); ?>
                     '<span class="screen-reader-text">' . __( 'Previous post:', 'unite-child' ) . '</span> ' .
                     '<span class="post-title">%title</span>',
             ) );
- 
         // End the loop.
         endwhile;
         ?>
